@@ -20,12 +20,14 @@ require_once('../libs/chnnum.class.php');
 
 $instance = new bihua();
 $chinese = new utf8_chinese;
-$res = $instance->query($words);
+//$res = $instance->query($words);
+
 
 $pytable = unserialize(file_get_contents('../resource/pytable_with_tune.txt'));
 $str_arr = utf8_str_split($words);
 $pinyinRes = array('');
-foreach($str_arr as $char){
+foreach($str_arr as $key => $char){
+    $res['list'][$key]['char'] = $char;
     if(preg_match('/^[\x{4e00}-\x{9fa5}]+$/u',$char)){
         $pinyin = $pytable[$char];
         $pinyinRes[$char] = $pinyin[0];
